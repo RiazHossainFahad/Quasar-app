@@ -7,7 +7,6 @@
     <div class="column flex-center">
       <q-form
         @submit="onSubmit"
-        @reset="onReset"
         class="q-gutter-md"
       >
         <q-input
@@ -16,7 +15,7 @@
           label="EMAIL"
           stack-label
           lazy-rules
-          :rules="[ val => val && val.length > 0 || 'Please type something']"
+          :rules="[ val => val && val.length > 0 || 'Please type email-address!']"
         />
 
         <q-input
@@ -27,7 +26,7 @@
           :type="isPwd ? 'password' : 'text'"
           lazy-rules
           :rules="[
-            val => val !== null && val !== '' || 'Invalid password'
+            val => val !== null && val !== '' || 'Empty password!'
           ]"
         >
           <template v-slot:append>
@@ -63,26 +62,17 @@ export default {
       email: '',
       password: '',
       isPwd: true,
-      accept: false,
     };
   },
   methods: {
     onSubmit() {
-      if (this.accept !== true) {
-        this.$q.notify({
-          color: 'red-5',
-          textColor: 'white',
-          icon: 'fas fa-exclamation-triangle',
-          message: 'You need to accept the license and terms first',
-        });
-      } else {
-        this.$q.notify({
-          color: 'green-4',
-          textColor: 'white',
-          icon: 'fas fa-check-circle',
-          message: 'Submitted',
-        });
-      }
+      this.$q.notify({
+        color: 'green-4',
+        textColor: 'white',
+        position: 'top',
+        icon: 'fas fa-check-circle',
+        message: 'Form Submitted!!',
+      });
     },
   },
 };

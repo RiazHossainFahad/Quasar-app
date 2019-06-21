@@ -9,6 +9,10 @@ const routes = [
       { path: 'confirmation', component: () => import('pages/ConfirmationPage.vue') },
     ],
   },
+  {
+    path: '/dashboard',
+    component: () => import('layouts/DashboardLayout.vue'),
+  },
 ];
 
 // Always leave this as last one
