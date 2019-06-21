@@ -1,0 +1,142 @@
+<template>
+  <q-page padding>
+    <div class="header">
+      <h4>REGISTER</h4>
+    </div>
+
+    <div class="column flex-center">
+      <q-form
+        @submit="onSubmit"
+        @reset="onReset"
+        class="q-gutter-xs"
+      >
+        <q-input
+          class="input"
+          v-model="fname"
+          label="FIRST NAME"
+          stack-label
+          lazy-rules
+          :rules="[ val => val && val.length > 0 || 'Please type something']"
+        />
+        <q-input
+          class="input"
+          v-model="lname"
+          label="LAST NAME"
+          stack-label
+          lazy-rules
+          :rules="[ val => val && val.length > 0 || 'Please type something']"
+        />
+        <q-input
+          class="input"
+          v-model="email"
+          label="EMAIL"
+          stack-label
+          lazy-rules
+          :rules="[ val => val && val.length > 0 || 'Please type something']"
+        />
+
+        <q-input
+          class="input"
+          v-model="password"
+          label="PASSWORD"
+          stack-label
+          :type="isPwd ? 'password' : 'text'"
+          lazy-rules
+          :rules="[
+            val => val !== null && val !== '' || 'Invalid password'
+          ]"
+        >
+          <template v-slot:append>
+            <q-icon
+              :name="isPwd ? 'visibility_off' : 'visibility'"
+              class="cursor-pointer"
+              @click="isPwd = !isPwd"
+            />
+          </template>
+        </q-input>
+
+        <q-input
+          class="input"
+          v-model="reTypePassword"
+          label="RE TYPE PASSWORD"
+          stack-label
+          :type="isPwd ? 'password' : 'text'"
+          lazy-rules
+          :rules="[
+            val => val !== null && val !== '' || 'Invalid password'
+          ]"
+        >
+          <template v-slot:append>
+            <q-icon
+              :name="isPwd ? 'visibility_off' : 'visibility'"
+              class="cursor-pointer"
+              @click="isPwdC = !isPwdC"
+            />
+          </template>
+        </q-input>
+
+        <div align="right">
+          <q-btn label="Register" type="submit" color="primary" no-caps/>
+        </div>
+
+        <div>
+          <span class="subtitle2">Already have an account?
+            <router-link to='/' class="blue" style="text-decoration: none">LOGIN</router-link>
+          </span>
+        </div>
+      </q-form>
+    </div>
+  </q-page>
+</template>
+
+<script>
+export default {
+  name: 'RegisterPage',
+  data() {
+    return {
+      fname: '',
+      lname: '',
+      email: '',
+      password: '',
+      reTypePassword: '',
+      isPwd: true,
+      isPwdC: true,
+      accept: false,
+    };
+  },
+  methods: {
+    onSubmit() {
+      if (this.accept !== true) {
+        this.$q.notify({
+          color: 'red-5',
+          textColor: 'white',
+          icon: 'fas fa-exclamation-triangle',
+          message: 'You need to accept the license and terms first',
+        });
+      } else {
+        this.$q.notify({
+          color: 'green-4',
+          textColor: 'white',
+          icon: 'fas fa-check-circle',
+          message: 'Submitted',
+        });
+      }
+    },
+  },
+};
+</script>
+
+<style scoped>
+.header{
+  margin: 10px 0 0 50px
+}
+
+.input{
+  width: 450px
+}
+@media screen and (max-width: 536px){
+.input{
+  width: 300px
+}
+}
+</style>
