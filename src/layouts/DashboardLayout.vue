@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-md">
-    <q-layout view="lHh Lpr lff" container class="shadow-2 rounded-borders">
+    <q-layout view="lHh Lpr lff" class="shadow-2 rounded-borders">
       <q-header elevated class="bg-cyan-8">
         <q-toolbar>
           <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
@@ -14,10 +14,10 @@
         show-if-above
       >
         <q-scroll-area
-            style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd"
+            style="height: calc(100% - 250px); margin-top: 150px; border-right: 1px solid #ddd"
         >
           <q-list padding>
-            <q-item clickable v-ripple>
+            <q-item active clickable v-ripple to="/dashboard">
               <q-item-section avatar>
                 <q-icon name="inbox" />
               </q-item-section>
@@ -27,7 +27,7 @@
               </q-item-section>
             </q-item>
 
-            <q-item active clickable v-ripple>
+            <q-item clickable v-ripple>
               <q-item-section avatar>
                 <q-icon name="star" />
               </q-item-section>
@@ -71,7 +71,7 @@
       </q-drawer>
 
       <q-page-container>
-        <router-view></router-view>
+        <router-view/>
       </q-page-container>
     </q-layout>
   </div>
